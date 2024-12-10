@@ -9,13 +9,9 @@ pipeline {
         stage('Set Node.js Version') {
             steps {
                 sh '''
-                    if command -v nvm > /dev/null; then
-                        echo "Using NVM to set Node.js version"
-                        . ~/.nvm/nvm.sh && nvm install 18 && nvm use 18
-                    else
-                        echo "NVM not found. Ensure Node.js 18 is installed globally"
-                    fi
-                    node -v
+                # Ensure Node.js 18 is used
+                export PATH="/path/to/nodejs18/bin:$PATH"
+                node -v
                 '''
             }
         }
@@ -37,7 +33,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
-                // Add your deployment steps here
+                // Add deployment steps here
             }
         }
     }
