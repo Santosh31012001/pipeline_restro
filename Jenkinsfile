@@ -9,31 +9,43 @@ pipeline {
         stage('Check Node.js Version') {
             steps {
                 sh '''
-                # Ensure Node.js 18 is used
-                export PATH="/path/to/nodejs18/bin:$PATH"
+                # Explicitly set the correct Node.js binary path
+                export PATH=/usr/local/bin:/usr/bin:$PATH
+                echo "Using Node.js version:"
                 node -v
                 '''
             }
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh '''
+                # Use the correct Node.js binary path during npm install
+                export PATH=/usr/local/bin:/usr/bin:$PATH
+                npm install
+                '''
             }
         }
-        // stage('Build') {
-        //     steps {
-        //         sh 'npm run build'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                sh '''
+                export PATH=/usr/local/bin:/usr/bin:$PATH
+                npm run build
+                '''
+            }
+        }
         stage('Test') {
             steps {
-                sh 'npm run test'
+                sh '''
+                export PATH=/usr/local/bin:/usr/bin:$PATH
+                npm run test
+                '''
             }
         }
-        // stage('Deploy') {
-        //     steps {
-        //         echo 'Deploying application...'
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                // Add deployment steps here
+            }
+        }
     }
 }
