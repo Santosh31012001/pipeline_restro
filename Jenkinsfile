@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the Git repository
-                git branch: 'main', url: 'https://github.com/Santosh31012001/pipeline_restro.git', branch: 'main'
+                git branch: 'main', url: 'https://github.com/Santosh31012001/pipeline_restro.git'
             }
         }
         stage('Install Dependencies') {
