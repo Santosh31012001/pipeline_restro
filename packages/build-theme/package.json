@@ -1,0 +1,18 @@
+{
+  "name": "@package/build-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/theme.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "styled-components": "^6.1.13"
+  },
+  "dependencies": {
+    "@package/build-theme": "file:"
+  }
+}

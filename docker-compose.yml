@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  antd-wrapper:
+    build:
+      context: ./packages/antd-wrapper
+    container_name: antd-wrapper
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./packages/antd-wrapper:/app
+    command: npm start
+
+  build-theme:
+    build:
+      context: ./packages/build-theme
+    container_name: build-theme
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./packages/build-theme:/app
+    command: npm start
+
+  redux-setup:
+    build:
+      context: ./packages/redux-setup
+    container_name: redux-setup
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./packages/redux-setup:/app
+    command: npm start
+
+  shared-ui:
+    build:
+      context: ./packages/shared-ui
+    container_name: shared-ui
+    ports:
+      - "3004:3000"
+    volumes:
+      - ./packages/shared-ui:/app
+    command: npm start

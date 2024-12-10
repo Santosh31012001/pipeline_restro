@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run lint-staged to format and lint files
+echo "Running lint-staged..."
+npx lint-staged
