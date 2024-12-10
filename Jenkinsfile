@@ -6,7 +6,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Santosh31012001/pipeline_restro.git'
             }
         }
-        stage('Set Node.js Version') {
+        stage('Check Node.js Version') {
             steps {
                 sh '''
                 # Ensure Node.js 18 is used
@@ -20,21 +20,20 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         sh 'npm run build'
+        //     }
+        // }
         stage('Test') {
             steps {
                 sh 'npm run test'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                // Add deployment steps here
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         echo 'Deploying application...'
+        //     }
+        // }
     }
 }
