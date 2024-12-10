@@ -3,8 +3,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the Git repository
                 git branch: 'main', url: 'https://github.com/Santosh31012001/pipeline_restro.git'
+            }
+        }
+        stage('Check Node.js Version') {
+            steps {
+                sh 'node -v'
             }
         }
         stage('Install Dependencies') {
@@ -25,7 +29,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
-                // Add deployment steps here
             }
         }
     }
