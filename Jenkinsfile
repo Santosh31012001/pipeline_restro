@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,37 +9,33 @@ pipeline {
         }
         stage('Check Node.js Version') {
             steps {
-                sh '''
-                # Explicitly set the correct Node.js binary path
-                export PATH=/usr/local/bin:/usr/bin:$PATH
-                echo "Using Node.js version:"
-                node -v
-                '''
+                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
+                    sh '''
+                    echo "Using Node.js version:"
+                    node -v
+                    '''
+                }
             }
         }
         stage('Install Dependencies') {
             steps {
-                sh '''
-                # Use the correct Node.js binary path during npm install
-                export PATH=/usr/local/bin:/usr/bin:$PATH
-                npm install
-                '''
+                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
+                    sh 'npm install'
+                }
             }
         }
         stage('Build') {
             steps {
-                sh '''
-                export PATH=/usr/local/bin:/usr/bin:$PATH
-                npm run build
-                '''
+                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
+                    sh 'npm run build'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh '''
-                export PATH=/usr/local/bin:/usr/bin:$PATH
-                npm run test
-                '''
+                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
+                    sh 'npm run test'
+                }
             }
         }
         stage('Deploy') {
