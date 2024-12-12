@@ -1,48 +1,40 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs "node-18"  // Use the name you assigned in Global Tool Configuration
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Santosh31012001/pipeline_restro.git'
+                git branch: 'main', url: 'https://github.com/your-username/your-nextjs-project.git'
             }
         }
-        stage('Check Node.js Version') {
-            steps {
-                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
-                    sh '''
-                    echo "Using Node.js version:"
-                    node -v
-                    '''
-                }
-            }
-        }
+
         stage('Install Dependencies') {
             steps {
-                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
+                script {
+                    // Install project dependencies
                     sh 'npm install'
                 }
             }
         }
+
         stage('Build') {
             steps {
-                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
+                script {
+                    // Build the Next.js project
                     sh 'npm run build'
                 }
             }
         }
-        stage('Test') {
-            steps {
-                nodejs(nodeJSInstallationName: 'Node 6.x', configId: 'b603a837-e0b8-4fc3-a2a6-e23a3f03defd') {
-                    sh 'npm run test'
-                }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                // Add deployment steps here
-            }
+    }
+
+    post {
+        always {
+            // Clean up the workspace after the build
+            cleanWs()
         }
     }
 }
