@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Install project dependencies
-                    sh 'npm install'
+                    sh 'sudo npm install'
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // Build the Next.js project
-                    sh 'npm run build'
+                    sh 'sudo npm run build'
                 }
             }
         }
