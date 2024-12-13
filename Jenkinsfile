@@ -1,32 +1,17 @@
 pipeline {
     agent any
-
     tools {
-        nodejs "node-18"  // Use the name you assigned in Global Tool Configuration
+        nodejs 'node-18'
     }
-
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Santosh31012001/pipeline_restro.git'
+                git url: 'https://github.com/Santosh31012001/pipeline_restro.git', branch: 'main'
             }
         }
-
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Install project dependencies
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    // Build the Next.js project
-                    sh 'npm run build'
-                }
+                sh 'npm install'
             }
         }
     }
